@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const {db, Saved} = require('./db')
 const path = require('path');
 const axios = require('axios');
 const cors = require('cors')
@@ -28,6 +29,31 @@ app.get('/api/beer/random',async(req,res,next)=>{
     try{
         const beer = (await axios.get(`https://sandbox-api.brewerydb.com/v2/beer/random/?key=${process.env.BREWERY_KEY}`)).data
         res.status(201).send(beer);
+    }catch(ex){
+        console.log(ex);
+    }
+})
+
+app.get('/api/saved',async(req,res,next)=>{
+    try{
+        res.status(201).send(await Saved.findAll());
+    }catch(ex){
+        console.log(ex);
+    }
+})
+
+app.post('/api/saved',async(req,res,next)=>{
+    try{
+        const saved = await Saved.create(req.body);
+        res.status(201).send(await Saved.findAll());
+    }catch(ex){
+        console.log(ex);
+    }
+})
+
+app.post('/api/brewerylist',async(req,res,next)=>{
+    try{
+
     }catch(ex){
         console.log(ex);
     }

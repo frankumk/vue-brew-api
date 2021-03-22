@@ -2,7 +2,8 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Breweries</router-link> |
-      <router-link to="/random">Random Beer</router-link>
+      <router-link to="/random">Random Beer</router-link> |
+      <router-link to="/saved">Saved List</router-link>
     </div>
     <router-view />
   </div>
