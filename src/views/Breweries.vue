@@ -7,21 +7,14 @@
 </template>
 
 <script>
-import axios from "axios"
+import {mapState} from 'vuex'
 // import Brewery from '../views/Brewery'
 export default {
-    async created(){
-      try{
-        this.breweries = (await axios.get("http://localhost:8080/api/breweries")).data.data
-        console.log(this.breweries)
-      }catch(ex){
-        console.log(ex)
-      }
+    created(){
+      this.$store.dispatch('fetchBreweries')
   },
-  data(){
-    return {
-      breweries: []
-    }
+  computed: {
+    ...mapState(['breweries'])
   }
 }
 </script>

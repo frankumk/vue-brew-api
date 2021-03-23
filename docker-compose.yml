@@ -1,0 +1,23 @@
+version: '3.7'
+services:
+  api:
+    image: vue-brew
+    build: .
+      context:
+      dockerfile: Dockerfile
+    networks:
+      - backend
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/usr/src/app
+
+  web-cli:
+    image: vue-brew
+    networks:
+      - backend
+    command: sh
+
+networks:
+  backend:
+    driver: bridge
